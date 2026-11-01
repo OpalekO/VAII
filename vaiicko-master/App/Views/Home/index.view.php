@@ -1,39 +1,76 @@
-<?php
-
-/** @var \Framework\Support\LinkGenerator $link */
-?>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col mt-5">
-            <div class="text-center">
-                <h2>Vaííčko MVC FW</h2>
-                <h3>Version <?= App\Configuration::FW_VERSION ?></h3>
-                <img src="<?= $link->asset('images/vaiicko_logo.png') ?>" alt="Framework Logo">
-                <p>
-                    Congratulations, you have successfully installed and run the framework
-                    <strong>Vaííčko</strong> <?= App\Configuration::FW_VERSION ?>!<br>
-                    We hope that you will create a great application using this framework.<br>
-                </p>
-                <p>
-                    This simple framework was created for teaching purposes and to better understand how the MVC
-                    architecture works.<br>
-                    It is intended for students of the subject <em>web application development</em>, but not only
-                    for them.
-                </p>
-            </div>
-        </div>
+<header class="page-header">
+    <div>
+        <p class="eyebrow">YOUR OVERVIEW</p>
+        <h1>Dashboard</h1>
+        <p class="muted">Welcome back! Here is your health summary.</p>
     </div>
-    <div class="row mt-3">
-        <div class="col text-center">
-            <h4>Authors</h4>
+    <a href="<?= $link->url('home.workout') ?>" class="button button-primary">
+    Add workout
+</a>
+</header>
+
+<section class="stats-grid" aria-label="Training summary">
+    <article class="stat-card">
+        <p class="stat-label">Workouts this week</p>
+        <p class="stat-value">4 <span class="stat-unit">sessions</span></p>
+        <p class="stat-caption positive">You are keeping a good rhythm</p>
+    </article>
+    <article class="stat-card">
+        <p class="stat-label">Active time</p>
+        <p class="stat-value">5.5 <span class="stat-unit">hours</span></p>
+        <p class="stat-caption">Across all workouts</p>
+    </article>
+    <article class="stat-card">
+        <p class="stat-label">Calories burned</p>
+        <p class="stat-value">2,140</p>
+        <p class="stat-caption">Estimated weekly total</p>
+    </article>
+</section>
+
+<section class="content-grid">
+    <article class="panel">
+        <div class="panel-heading">
             <div>
-                <a href="mailto:Patrik.Hrkut@fri.uniza.sk">doc. Ing. Patrik Hrkút, PhD.</a><br>
-                <a href="mailto:Michal.Duracik@fri.uniza.sk">Ing. Michal Ďuračík, PhD.</a><br>
-                <a href="mailto:Matej.Mesko@fri.uniza.sk">Ing. Matej Meško, PhD.</a><br><br>
-                &copy; 2020-<?= date('Y') ?> University of Žilina, Faculty of Management Science and Informatics,
-                Department of Software Technologies
+                <h2>Activity overview</h2>
+                <p class="muted">Your activity over the last seven days</p>
+            </div>
+            <span class="pill">This week</span>
+        </div>
+        <div class="activity-chart" role="img" aria-label="Bar chart showing activity for Monday through Sunday">
+            <div class="chart-column"><span style="height: 36%"></span><small>Mon</small></div>
+            <div class="chart-column"><span style="height: 62%"></span><small>Tue</small></div>
+            <div class="chart-column"><span style="height: 45%"></span><small>Wed</small></div>
+            <div class="chart-column"><span style="height: 82%"></span><small>Thu</small></div>
+            <div class="chart-column"><span style="height: 28%"></span><small>Fri</small></div>
+            <div class="chart-column"><span style="height: 72%"></span><small>Sat</small></div>
+            <div class="chart-column"><span style="height: 18%"></span><small>Sun</small></div>
+        </div>
+    </article>
+
+    <article class="panel">
+        <div class="panel-heading">
+            <div>
+                <h2>Latest workout</h2>
+                <p class="muted">Your most recent session</p>
             </div>
         </div>
+        <div class="workout-summary">
+            <div class="workout-icon" aria-hidden="true">↗</div>
+            <div>
+                <h3>Upper body</h3>
+                <p class="muted">Today · 45 minutes</p>
+            </div>
+        </div>
+        <div class="summary-row"><span>Exercises</span><strong>6</strong></div>
+        <div class="summary-row"><span>Sets completed</span><strong>18</strong></div>
+        <a class="text-link" href="<?= $link->url('home.workout') ?>">
+    </article>
+</section>
+
+<section class="panel reminders-panel">
+    <div>
+        <h2>Your next step</h2>
+        <p class="muted">Stay consistent. Add a new training session when you finish your workout.</p>
     </div>
-</div>
+    <a class="button button-secondary" href="<?= $link->url('home.workout') ?>">
+</section>

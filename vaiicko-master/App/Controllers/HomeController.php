@@ -30,6 +30,12 @@ class HomeController extends BaseController
         return true;
     }
 
+    
+    public function workout(Request $request): Response
+    {
+        return $this->html();
+    }
+
     /**
      * Displays the default home page.
      *
