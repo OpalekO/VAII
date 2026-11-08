@@ -1,0 +1,8 @@
+
+CREATE TABLE IF NOT EXISTS workouts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    date DATE NOT NULL,
+    duration INT NOT NULL,
+    type VARCHAR(50) NOT NULL
+    );

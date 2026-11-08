@@ -11,19 +11,19 @@
     <div class="panel-heading">
         <div>
             <h2>Workout details</h2>
-            <p class="muted">This is a static preview; saving is not connected yet.</p>
+            <p class="muted">Enter the details of your workout.</p>
         </div>
     </div>
 
-    <form action="#" method="get">
+    <form action="<?= htmlspecialchars($link->url(['Home', 'workout'])) ?>" method="post">
         <div class="form-grid">
             <label class="form-field">
                 <span>Workout name</span>
-                <input type="text" value="Upper body" name="workout-name">
+                <input type="text" value="Upper body" name="name">
             </label>
             <label class="form-field">
                 <span>Date</span>
-                <input type="date" value="2026-11-01" name="workout-date">
+                <input type="date" value="2026-11-01" name="date">
             </label>
             <label class="form-field">
                 <span>Duration (minutes)</span>
@@ -31,7 +31,7 @@
             </label>
             <label class="form-field">
                 <span>Workout type</span>
-                <select name="workout-type">
+                <select name="type">
                     <option>Strength</option>
                     <option>Cardio</option>
                     <option>Mobility</option>
@@ -76,7 +76,64 @@
 
         <div class="form-actions">
             <a class="button button-secondary" href="<?= htmlspecialchars($link->url(['Home', 'index'])) ?>">Cancel</a>
-            <button class="button button-primary" type="button">Save workout</button>
+            <button class="button button-primary" type="submit">
+                Save workout
+            </button>
         </div>
     </form>
 </section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h2>Your workouts</h2>
+            <p class="muted">Workouts saved in your database.</p>
+        </div>
+    </div>
+
+    <?php if (empty($workouts)): ?>
+        <p class="muted">No workouts recorded yet.</p>
+    <?php else: ?>
+        <div class="table-wrap">
+            <table class="exercise-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($workouts as $workout): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($workout->name ?? '') ?></td>
+                        <td><?= htmlspecialchars($workout->date ?? '') ?></td>
+                        <td><?= htmlspecialchars((string) ($workout->duration ?? '')) ?> min</td>
+                        <td><?= htmlspecialchars($workout->type ?? '') ?></td>
+                        <td>
+                            <a
+                                    class="button button-secondary"
+                                    href="<?= htmlspecialchars($link->url('home.edit') . '&id=' . (int) $workout->id) ?>"
+                            >
+                                Edit
+                            </a>
+                            <form
+                                    action="<?= htmlspecialchars($link->url('home.delete') . '&id=' . (int) $workout->id) ?>"
+                                    method="post"
+                                    onsubmit="return confirm('Are you sure you want to delete this workout?');"
+                            >
+                                <button class="button button-secondary" type="submit">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+</section>
+
